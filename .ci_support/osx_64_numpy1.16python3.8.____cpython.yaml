@@ -42,6 +42,8 @@ pin_run_as_build:
     max_pin: x
 python:
 - 3.8.* *_cpython
+python_impl:
+- cpython
 readline:
 - '8.0'
 target_platform:
@@ -52,3 +54,4 @@ zip_keys:
   - fortran_compiler_version
 - - python
   - numpy
+  - python_impl
