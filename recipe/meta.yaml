@@ -13,8 +13,8 @@ source:
     - readline.patch
         
 build:
-  number: 1
-  skip: true  # [win]
+  number: 2
+  skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
   build:
@@ -62,3 +62,4 @@ about:
 extra:
   recipe-maintainers:
     - demorest
+    - straten

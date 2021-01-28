@@ -185,4 +185,5 @@ Feedstock Maintainers
 =====================
 
 * [@demorest](https://github.com/demorest/)
+* [@straten](https://github.com/straten/)
 
