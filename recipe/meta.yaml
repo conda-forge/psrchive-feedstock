@@ -1,5 +1,6 @@
 {% set name = "psrchive" %}
-{% set version = "2021-01-18" %}
+{% set version = "2021-02-13" %}
+{% set sha256 = "d010af6ed698bb1a09e4d63428b609180efad79bdb6a7dba2f5623463e4ee3ea" %}
 
 package:
   name: "{{ name | lower }}"
@@ -8,12 +9,10 @@ package:
 source:
   # e.g., https://sourceforge.net/projects/psrchive/files/psrchive/2021-01-18/psrchive-2021-01-18.tar.gz/download
   url: https://sourceforge.net/projects/{{ name }}/files/{{ name }}/{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 74b2bd483bb8928bd070b96e7c845e1678213ba57bbdfa5a63726635554f8e9d
-  patches:
-    - readline.patch
+  sha256: {{ sha256 }}
         
 build:
-  number: 2
+  number: 0
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
