@@ -45,7 +45,7 @@ python:
 python_impl:
 - cpython
 readline:
-- '8.0'
+- '8'
 target_platform:
 - osx-64
 zip_keys:
