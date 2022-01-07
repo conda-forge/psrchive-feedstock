@@ -10,7 +10,11 @@ source:
   # e.g., https://sourceforge.net/projects/psrchive/files/psrchive/2021-01-18/psrchive-2021-01-18.tar.gz/download
   url: https://sourceforge.net/projects/{{ name }}/files/{{ name }}/{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-        
+  patches:
+    # backport fixes to support cfitsio 4.0.0
+    - 0001-Make-compatible-with-fitsio-4.0.0.patch
+    - 0002-Base-10-error-in-fits-version-check.patch
+
 build:
   number: 2
   skip: true  # [win or (python_impl == 'pypy')]
