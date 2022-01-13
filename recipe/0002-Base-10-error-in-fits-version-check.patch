@@ -1,0 +1,25 @@
+From 32be3dc58e346923c980860316f4de7fe54522b2 Mon Sep 17 00:00:00 2001
+From: Michael Keith <michael.keith@manchester.ac.uk>
+Date: Tue, 27 Jul 2021 12:09:05 +0100
+Subject: [PATCH] Base 10 error in fits version check
+
+---
+ Util/fitsutil/fits_version_check.C | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Util/fitsutil/fits_version_check.C b/Util/fitsutil/fits_version_check.C
+index 911a1bc85..8a8bd401e 100644
+--- a/Util/fitsutil/fits_version_check.C
++++ b/Util/fitsutil/fits_version_check.C
+@@ -18,7 +18,7 @@ void fits_version_check (bool verbose)
+     float version = 0.0;
+     fits_get_version (&version);
+ 
+-    float lib_version = CFITSIO_MAJOR + CFITSIO_MINOR/ceil(log10(CFITSIO_MINOR));
++    float lib_version = CFITSIO_MAJOR + CFITSIO_MINOR/pow(10,ceil(log10(CFITSIO_MINOR)));
+ 
+     if (verbose)
+         cerr << "fits_version_check:"
+-- 
+2.34.1
+

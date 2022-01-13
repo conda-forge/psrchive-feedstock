@@ -1,0 +1,48 @@
+From e245383acac1eae8143ce1e6533e144b82a7043c Mon Sep 17 00:00:00 2001
+From: Michael Keith <michael.keith@manchester.ac.uk>
+Date: Tue, 27 Jul 2021 12:06:34 +0100
+Subject: [PATCH] Make compatible with fitsio 4.0.0
+
+Seems that fitsio 4.0 now has two decimal places in the vesrion so
+cannot be treated as a float. We build the previous style of float
+version number so that it can be used.
+---
+ Util/fitsutil/fits_version_check.C | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
+
+diff --git a/Util/fitsutil/fits_version_check.C b/Util/fitsutil/fits_version_check.C
+index e971d20a7..911a1bc85 100644
+--- a/Util/fitsutil/fits_version_check.C
++++ b/Util/fitsutil/fits_version_check.C
+@@ -15,16 +15,18 @@ using namespace std;
+ 
+ void fits_version_check (bool verbose)
+ {
+-  float version = 0.0;
+-  fits_get_version (&version);
++    float version = 0.0;
++    fits_get_version (&version);
+ 
+-  if (verbose)
+-    cerr << "fits_version_check:"
+-      " library=" << version <<
+-      " header=" << CFITSIO_VERSION << endl;
++    float lib_version = CFITSIO_MAJOR + CFITSIO_MINOR/ceil(log10(CFITSIO_MINOR));
+ 
+-  if ( fabs(version - CFITSIO_VERSION) > 1e-4)
+-    throw Error (InvalidState, "fits_version_check",
+-		 "CFITSIO version mismatch: library=%f header=%f",
+-		 version, CFITSIO_VERSION);
++    if (verbose)
++        cerr << "fits_version_check:"
++            " library=" << version <<
++            " header=" << lib_version << endl;
++
++    if ( fabs(version - lib_version) > 1e-4)
++        throw Error (InvalidState, "fits_version_check",
++                "CFITSIO version mismatch: library=%f header=%f",
++                version, lib_version);
+ }
+-- 
+2.34.1
+
