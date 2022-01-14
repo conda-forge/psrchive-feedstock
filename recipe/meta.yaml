@@ -1,6 +1,6 @@
 {% set name = "psrchive" %}
-{% set version = "2021-06-03" %}
-{% set sha256 = "e5d8f31c3be36fe61352e05e6951e779dc7a467a932d67c09ea72280ee58fd82" %}
+{% set version = "2022-01-14" %}
+{% set sha256 = "069b793ac823a60942a8739e0446dad11970b8787a91afa6a63b4f5560ce4e5a" %}
 
 package:
   name: "{{ name | lower }}"
@@ -10,10 +10,6 @@ source:
   # e.g., https://sourceforge.net/projects/psrchive/files/psrchive/2021-01-18/psrchive-2021-01-18.tar.gz/download
   url: https://sourceforge.net/projects/{{ name }}/files/{{ name }}/{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    # backport fixes to support cfitsio 4.0.0
-    - 0001-Make-compatible-with-fitsio-4.0.0.patch
-    - 0002-Base-10-error-in-fits-version-check.patch
 
 build:
   number: 2
