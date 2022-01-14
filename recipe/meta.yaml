@@ -16,7 +16,7 @@ source:
     - 0002-Base-10-error-in-fits-version-check.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
