@@ -3,9 +3,9 @@ MACOSX_DEPLOYMENT_TARGET:
 c_compiler:
 - clang
 c_compiler_version:
-- '11'
+- '12'
 cfitsio:
-- 4.0.0
+- 4.1.0
 channel_sources:
 - conda-forge
 channel_targets:
@@ -13,7 +13,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '11'
+- '12'
 fftw:
 - '3'
 fortran_compiler:
@@ -27,7 +27,7 @@ libcblas:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:
-- '1.18'
+- '1.19'
 perl:
 - 5.32.1
 pin_run_as_build:
