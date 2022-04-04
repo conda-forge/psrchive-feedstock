@@ -46,8 +46,11 @@ requirements:
     - fftw
     - readline
 test:
+  files:
+    - test_data/example_psrfits.fits
   commands:
     - pav -h
+    - pam -T -e T example_psrfits.fits && test -f example_psrfits.T
   imports:
     - psrchive
 
