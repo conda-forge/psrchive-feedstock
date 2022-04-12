@@ -14,7 +14,7 @@ source:
     - 0003-fitsio-4.1.0-version-check.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
