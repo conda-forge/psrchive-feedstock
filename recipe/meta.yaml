@@ -26,6 +26,7 @@ requirements:
     - automake
     - libtool
     - swig
+    - pkg-config
   host:
     - cfitsio
     - pgplot
