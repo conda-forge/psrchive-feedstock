@@ -1,6 +1,6 @@
 {% set name = "psrchive" %}
-{% set version = "2022-01-14" %}
-{% set sha256 = "069b793ac823a60942a8739e0446dad11970b8787a91afa6a63b4f5560ce4e5a" %}
+{% set version = "2022-05-14" %}
+{% set sha256 = "4d25609837cba1be244fa8adc8f105afe31972f2650bc0b90438862cf35395e1" %}
 
 package:
   name: "{{ name | lower }}"
@@ -14,7 +14,7 @@ source:
     - 0003-fitsio-4.1.0-version-check.patch
 
 build:
-  number: 3
+  number: 1
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
