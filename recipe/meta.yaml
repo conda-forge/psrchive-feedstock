@@ -10,9 +10,11 @@ source:
   # e.g., https://sourceforge.net/projects/psrchive/files/psrchive/2021-01-18/psrchive-2021-01-18.tar.gz/download
   url: https://sourceforge.net/projects/{{ name }}/files/{{ name }}/{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+      - 0004-swig410-flatstatic.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
