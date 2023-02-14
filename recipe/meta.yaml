@@ -49,14 +49,15 @@ requirements:
     - fftw
     - readline
 test:
+  imports:
+    - psrchive
   files:
     - test_data/example_psrfits.fits
   commands:
     - pav -h
     - pam -T -e T test_data/example_psrfits.fits
     - test -f test_data/example_psrfits.T
-  imports:
-    - psrchive
+    - python -c "import psrchive; psrchive.Archive_load('test_data/example_psrfits.fits')"
 
 about:
   home: http://psrchive.sourceforge.net/
