@@ -1,0 +1,13 @@
+diff --git a/Util/units/ReferenceAble.C b/Util/units/ReferenceAble.C
+index 1820e0691..1bb32fcb1 100644
+--- a/Util/units/ReferenceAble.C
++++ b/Util/units/ReferenceAble.C
+@@ -53,7 +53,7 @@ static pthread_mutex_t* get_mutex ()
+ {
+   static pthread_mutex_t* mutex = 0;
+   if (!mutex)
+-    mutex = recursive_mutex ();
++    mutex = ::recursive_mutex ();
+   return mutex;
+ }
+ 
