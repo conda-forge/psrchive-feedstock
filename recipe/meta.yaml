@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
   patches:
       - 0004-swig410-flatstatic.patch
-      - 0005-recursive-mutex-namespace.patch
+      - 0005-namespace-fixes.patch
 
 build:
   number: 0
