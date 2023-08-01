@@ -1,0 +1,35 @@
+diff --git a/src/util/Estimate.h b/src/util/Estimate.h
+index f0bdd78..80cfae4 100644
+--- a/src/util/Estimate.h
++++ b/src/util/Estimate.h
+@@ -140,6 +140,17 @@ class Estimate
+   friend const Estimate operator - (Estimate a)
+   { return Estimate (-a.val, a.var); }
+ 
++  friend const std::complex<Estimate> operator * (const std::complex<Estimate>& a, const std::complex<Estimate>& b)
++  {
++    return std::complex<Estimate> (
++        a.real()*b.real() - a.imag()*b.imag(),
++        a.real()*b.imag() + a.imag()*b.real()
++        );
++  }
++  
++  friend const Estimate norm (const std::complex<Estimate>& u)
++  { return u.real()*u.real() + u.imag()*u.imag(); }
++
+   //! See http://mathworld.wolfram.com/ErrorPropagation.html Equation (15)
+   friend const Estimate exp (const Estimate& u)
+   { T val = ::exp (u.val); return Estimate (val, val*val*u.var); }
+diff --git a/More/MEAL/ComplexRVM.C b/More/MEAL/ComplexRVM.C
+index f6246fd7d..695ac4949 100644
+--- a/More/MEAL/ComplexRVM.C
++++ b/More/MEAL/ComplexRVM.C
+@@ -164,7 +164,7 @@ void MEAL::ComplexRVM::add_state (double phase, std::complex< Estimate<double> >
+   if (!gains_maximum_likelihood)
+   {
+     auto gain = new Gain<Complex> ();
+-    double L = ::sqrt( ::norm(linear).val );
++    double L = ::sqrt( norm(linear).val );
+     gain->set_gain(L);
+     s.gain = gain;
+   }
