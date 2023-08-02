@@ -13,7 +13,7 @@ source:
   patches:
       - 0004-swig410-flatstatic.patch
       - 0005-namespace-fixes.patch
-      - 0006-complex-estimate.patch # [osx]
+      - 0006-complex-estimate.patch  # [osx]
 
 build:
   number: 0
