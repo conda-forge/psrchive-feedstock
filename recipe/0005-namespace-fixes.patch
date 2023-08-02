@@ -14,6 +14,7 @@ index 506bfce57..3f3a2a34a 100644
 +  ::set (plotter.plot_slw, plot_widths);
  }
  
+  catch (Error& error)
 diff --git a/Util/units/ReferenceAble.C b/Util/units/ReferenceAble.C
 index 1820e0691..1bb32fcb1 100644
 --- a/Util/units/ReferenceAble.C
@@ -26,3 +27,4 @@ index 1820e0691..1bb32fcb1 100644
 +    mutex = ::recursive_mutex ();
    return mutex;
  }
+ 

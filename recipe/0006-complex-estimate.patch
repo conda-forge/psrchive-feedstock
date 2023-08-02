@@ -1,7 +1,7 @@
-diff --git a/src/util/Estimate.h b/src/util/Estimate.h
+diff --git a/Util/epsic/src/util/Estimate.h b/Util/epsic/src/util/Estimate.h
 index f0bdd78..80cfae4 100644
---- a/src/util/Estimate.h
-+++ b/src/util/Estimate.h
+--- a/Util/epsic/src/util/Estimate.h
++++ b/Util/epsic/src/util/Estimate.h
 @@ -140,6 +140,17 @@ class Estimate
    friend const Estimate operator - (Estimate a)
    { return Estimate (-a.val, a.var); }
