@@ -28,3 +28,16 @@ index 1820e0691..1bb32fcb1 100644
    return mutex;
  }
  
+diff --git a/Util/epsic/src/epsic.cpp b/Util/epsic/src/epsic.cpp
+index 99a4d33..7b1cfbc 100644
+--- a/Util/epsic/src/epsic.cpp
++++ b/Util/epsic/src/epsic.cpp
+@@ -157,7 +157,7 @@ int main (int argc, char** argv)
+ 
+   mode source;
+   combination* dual = NULL;
+-  sample* stokes_sample = NULL;
++  ::sample* stokes_sample = NULL;
+   bivariate_lognormal_modes* covariant = NULL;
+ 
+   mode_setup setup_A;
