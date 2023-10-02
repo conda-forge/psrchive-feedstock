@@ -1,6 +1,6 @@
 {% set name = "psrchive" %}
-{% set version = "2023-01-24" %}
-{% set sha256 = "6911a78a03077da3a24dfc399c4e25a130bf5f4fd97f8a165827cb30a5ee2414" %}
+{% set version = "2023-10-02" %}
+{% set sha256 = "7bbde5591fadec3e9d4cd963963a9b7e680e3078e0fd6b253e73e3e1570a0a5b" %}
 
 package:
   name: "{{ name | lower }}"
@@ -14,7 +14,7 @@ source:
       - 0004-swig410-flatstatic.patch
 
 build:
-  number: 4
+  number: 0
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
