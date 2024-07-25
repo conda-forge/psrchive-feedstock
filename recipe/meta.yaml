@@ -1,6 +1,6 @@
 {% set name = "psrchive" %}
-{% set version = "2023-10-02" %}
-{% set sha256 = "7bbde5591fadec3e9d4cd963963a9b7e680e3078e0fd6b253e73e3e1570a0a5b" %}
+{% set version = "2024-07-25" %}
+{% set sha256 = "01b7562186644b36db17d768db163442cac0bf90bd7081887ad50b6a4e63d90a" %}
 
 package:
   name: "{{ name | lower }}"
@@ -14,7 +14,7 @@ source:
       - 0004-swig410-flatstatic.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
@@ -22,6 +22,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - {{ compiler('fortran') }}
+    - {{ stdlib("c") }}
     - make
     - perl
     - autoconf
@@ -34,7 +35,7 @@ requirements:
     - pgplot
     - gsl
     - python {{ python }}
-    - numpy
+    - numpy <2.0
     - fftw
     - tempo2
     - libcblas
@@ -44,7 +45,7 @@ requirements:
     - pgplot
     - gsl
     - python
-    - numpy
+    - numpy <2.0
     - tempo2
     - fftw
     - readline
