@@ -35,7 +35,7 @@ requirements:
     - pgplot
     - gsl
     - python {{ python }}
-    - numpy<2.0
+    - numpy <2.0
     - fftw
     - tempo2
     - libcblas
@@ -45,7 +45,7 @@ requirements:
     - pgplot
     - gsl
     - python
-    - numpy<2.0
+    - numpy <2.0
     - tempo2
     - fftw
     - readline
