@@ -14,7 +14,7 @@ source:
       - 0004-swig410-flatstatic.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
