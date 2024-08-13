@@ -35,7 +35,7 @@ requirements:
     - pgplot
     - gsl
     - python {{ python }}
-    - numpy <2.0
+    - numpy
     - fftw
     - tempo2
     - libcblas
@@ -45,7 +45,7 @@ requirements:
     - pgplot
     - gsl
     - python
-    - {{ pin_compatible('numpy') }}
+    - numpy
     - tempo2
     - fftw
     - readline
