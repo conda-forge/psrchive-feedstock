@@ -14,7 +14,7 @@ source:
       - 0004-swig410-flatstatic.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
@@ -35,7 +35,7 @@ requirements:
     - pgplot
     - gsl
     - python {{ python }}
-    - numpy <2.0
+    - numpy
     - fftw
     - tempo2
     - libcblas
@@ -45,7 +45,7 @@ requirements:
     - pgplot
     - gsl
     - python
-    - numpy <2.0
+    - numpy
     - tempo2
     - fftw
     - readline
