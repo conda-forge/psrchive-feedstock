@@ -1,0 +1,17 @@
+--- a/More/python/psrchive.i
++++ b/More/python/psrchive.i
+@@ -150,6 +150,7 @@ void pointer_tracker_remove(Reference::Able *ptr) {
+ %ignore Pulsar::FrontendCorrection::get_transformation(unsigned);
+ %ignore Pulsar::FrontendCorrection::get_basis();
+ %ignore Pulsar::FrontendCorrection::get_projection(unsigned);
++%ignore Pulsar::FaradayRotation::get_identity();
+ 
+ // Also does not use the assignment operator
+ %ignore Pulsar::Archive::operator=(const Archive&);
+@@ -924,4 +925,4 @@ def rotate_phase(self,phase): return self._rotate_phase_swig(phase)
+     {
+         return self->Pulsar::ColdPlasma<Calibration::Faraday,Pulsar::DeFaraday>::get_reference_wavelength();
+     }
+-}
+\ No newline at end of file
++}
