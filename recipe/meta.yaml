@@ -15,7 +15,7 @@ source:
       - 0005-ignore-jones.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or (python_impl == 'pypy')]
 
 requirements:
