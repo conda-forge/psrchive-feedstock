@@ -12,6 +12,7 @@ source:
   sha256: {{ sha256 }}
   patches:
       - 0004-swig410-flatstatic.patch
+      - 0006-python-numpy2.patch
 
 build:
   number: 0
