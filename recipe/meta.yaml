@@ -13,6 +13,7 @@ source:
   patches:
       - 0004-swig410-flatstatic.patch
       - 0006-python-numpy2.patch
+      - 0007-const-item.patch  # [osx]
 
 build:
   number: 0
