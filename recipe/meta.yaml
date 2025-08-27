@@ -14,6 +14,8 @@ source:
       - 0004-swig410-flatstatic.patch
       - 0006-python-numpy2.patch
       - 0007-reference-operator.patch  # [osx]
+      - 0008-basename.patch  # [osx]
+      - 0009-epsic-complex.patch  # [osx]
 
 build:
   number: 0
