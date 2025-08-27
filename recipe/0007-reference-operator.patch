@@ -1,0 +1,182 @@
+diff --git a/More/General/DynamicSpectrum.C b/More/General/DynamicSpectrum.C
+index 52368c9a6..ef39a71e0 100644
+--- a/More/General/DynamicSpectrum.C
++++ b/More/General/DynamicSpectrum.C
+@@ -101,10 +101,10 @@ const double Pulsar::DynamicSpectrum::get_freq(unsigned ichan, unsigned isub)
+ void Pulsar::DynamicSpectrum::compute() 
+ {
+   // Check that all necessary stuff is set
+-  if (arch==NULL)
++  if (!arch)
+     throw Error(InvalidState, "DynamicSpectrum::compute", 
+         "compute() called without input Archive set.");
+-  if (flux==NULL)
++  if (!flux)
+     throw Error(InvalidState, "DynamicSpectrum::compute", 
+         "compute() called without flux method set.");
+   if (nchan==0 || nsub==0 || ds_data==NULL || ds_data_err==NULL)
+@@ -112,9 +112,9 @@ void Pulsar::DynamicSpectrum::compute()
+         "Inconsistent internal state.");
+ 
+   // Loop over subints, chans, compute flux
+-  for (int isub=0; isub<nsub; isub++) {
++  for (unsigned isub=0; isub<nsub; isub++) {
+     Reference::To<const Integration> i = arch->get_Integration(isub);
+-    for (int ichan=0; ichan<nchan; ichan++) {
++    for (unsigned ichan=0; ichan<nchan; ichan++) {
+       Reference::To<const Profile> p = i->get_Profile(0,ichan);
+       Estimate<double> e(0.0,0.0);
+       if (p->get_weight()!=0.0) e = flux->get_flux(p);
+@@ -154,8 +154,8 @@ void Pulsar::DynamicSpectrum::unload(const std::string& filename,
+ 
+   fprintf(fout, "# Data columns:\n");
+   fprintf(fout, "# isub ichan time(min) freq(MHz) flux flux_err\n");
+-  for (int isub=0; isub<nsub; isub++) {
+-    for (int ichan=0; ichan<nchan; ichan++) {
++  for (unsigned isub=0; isub<nsub; isub++) {
++    for (unsigned ichan=0; ichan<nchan; ichan++) {
+       fprintf(fout, "%4d %4d %10.4f %12.6f %+.6e %+.6e\n", isub, ichan,
+           get_rel_epoch(isub).in_minutes(),
+           get_freq(ichan),
+diff --git a/More/Polarimetry/Pulsar/ConfigurableProjection.h b/More/Polarimetry/Pulsar/ConfigurableProjection.h
+index 2ad0d5303..c9222468c 100644
+--- a/More/Polarimetry/Pulsar/ConfigurableProjection.h
++++ b/More/Polarimetry/Pulsar/ConfigurableProjection.h
+@@ -41,23 +41,12 @@ namespace Pulsar
+     //! Set the frequency channel for which a tranformation will be computed
+     void set_chan (unsigned _chan);
+ 
+-    class Transformation;
+-
+     //! Set the number of frequency channels with a unique Transformation
+     void set_nchan (unsigned nchan) override;
+ 
+-    //! Return the Transformation for the specified channel
+-    Transformation* get_transformation (unsigned ichan) override;
+-
+     //! Return a newly constructed Argument::Value for the current archive / subint / chan
+     MEAL::Argument::Value* new_value () override;
+ 
+-    //! Return the Transformation instance for the specified channel
+-    const Transformation* get_transformation (unsigned ichan) const;
+-
+-    //! Return true if the speficied channel has a valid solution
+-    bool get_transformation_valid (unsigned ichan) const;
+-
+     //! Get the number of frequency channels
+     unsigned get_nchan () const;
+ 
+@@ -104,8 +93,6 @@ namespace Pulsar
+     //! Names of Archive attributes assigned to each abscissa/dimension
+     std::map< unsigned, std::vector<std::string> > parameters;
+ 
+-    std::vector< Reference::To<Transformation> > xforms;
+-
+     //! The effective number of dimensions / abscissa
+     unsigned effective_ndim = 0;
+     
+@@ -144,6 +131,19 @@ namespace Pulsar
+       MEAL::Argument* get_argument () { return &argument; }
+     };
+ 
++    //! Return the Transformation for the specified channel
++    Transformation* get_transformation (unsigned ichan) override;
++
++    //! Return the Transformation instance for the specified channel
++    const Transformation* get_transformation (unsigned ichan) const;
++
++    //! Return true if the speficied channel has a valid solution
++    bool get_transformation_valid (unsigned ichan) const;
++
++  protected:
++
++    //! The Transformation instances for each channel
++    std::vector< Reference::To<Transformation> > xforms;
+   };
+ 
+   void copy (MEAL::Complex2* to, const ConfigurableProjectionExtension::Transformation* from);
+diff --git a/Util/units/ReferenceTo.h b/Util/units/ReferenceTo.h
+index 95a04f0fd..bb14dc258 100644
+--- a/Util/units/ReferenceTo.h
++++ b/Util/units/ReferenceTo.h
+@@ -12,10 +12,12 @@
+ #define __psrchive_util_units_ReferenceTo_h
+ 
+ // #define _DEBUG 1
++//
+ #include "debug.h"
+ #include "ReferenceAble.h"
+ #include "Error.h"
+ 
++#include <type_traits>
+ #include <typeinfo>
+ #include <string>
+ 
+@@ -56,8 +58,35 @@ namespace Reference {
+     //! Comparison operator
+     bool operator != (const Type* ptr) const;
+ 
+-    //! Work around "warning: ISO C++ says that these are ambiguous
+-    /*! even though the worst conversion for the first is better than the worst conversion for the second" */
++    //! Comparison operator 
++    /*! 
++     * This overloaded operator is 
++     *  - prioritized over ‘operator==(Type*, Type*)’ <built-in> 
++     *  - enabled only if Type is not const (e.g. Reference::To<const T>)
++     */ 
++    template <typename U = Type>
++    typename std::enable_if<!std::is_const<U>::value, bool>::type
++    operator == (U* ptr) const { return is_equal_to(ptr); }
++
++    //! Comparison operator
++    /*!
++     * This overloaded operator is
++     *  - prioritized over ‘operator!=(Type*, Type*)’ <built-in>
++     *  - enabled only if Type is not const (e.g. Reference::To<const T>)
++     */
++    template <typename U = Type>
++    typename std::enable_if<!std::is_const<U>::value, bool>::type
++    operator != (U* ptr) const { return !is_equal_to(ptr); }
++
++    //! Comparison operator
++    /*! This version is prioritized over ‘operator!=(Type*, Type*)’ <built-in> */
++    bool operator == (std::nullptr_t) const;
++
++    //! Comparison operator
++    /*! This version is prioritized over ‘operator!=(Type*, Type*)’ <built-in> */
++    bool operator != (std::nullptr_t) const;
++
++    //! Worker method for all six comparison operator overloads
+     bool is_equal_to (const Type* ptr) const;
+ 
+     //! Cast to Type* operator
+@@ -104,14 +133,28 @@ namespace Reference {
+ template<class Type, bool active>
+ bool Reference::To<Type,active>::operator == (const Type* ptr) const
+ {
+-  DEBUG("Reference::To<"+name()+">::operator ==");
++  DEBUG("Reference::To<"+name()+">::operator == const Type*");
+   return is_equal_to(ptr);
+ }
+ 
+ template<class Type, bool active>
+ bool Reference::To<Type,active>::operator != (const Type* ptr) const
+ {
+-  DEBUG("Reference::To<"+name()+">::operator !=");
++  DEBUG("Reference::To<"+name()+">::operator != const Type*");
++  return !is_equal_to(ptr);
++}
++
++template<class Type, bool active>
++bool Reference::To<Type,active>::operator == (std::nullptr_t ptr) const
++{
++  DEBUG("Reference::To<"+name()+">::operator == std::nullptr_t");
++  return is_equal_to(ptr);
++}
++
++template<class Type, bool active>
++bool Reference::To<Type,active>::operator != (std::nullptr_t ptr) const
++{
++  DEBUG("Reference::To<"+name()+">::operator != std::nullptr_t");
+   return !is_equal_to(ptr);
+ }
