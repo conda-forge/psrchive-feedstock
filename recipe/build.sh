@@ -8,6 +8,9 @@ echo "build.sh updated CXXFLAGS=${CXXFLAGS}"
 export LDFLAGS=$(echo "$LDFLAGS" | sed 's/-Wl,-dead_strip_dylibs//')
 echo "build.sh updated LDFLAGS=${LDFLAGS}"
 
+# Regenerate configure
+autoreconf -i -f
+
 ./configure --prefix=$PREFIX --disable-local --enable-shared \
   --includedir=$PREFIX/include/psrchive --with-Qt-dir=no \
   PGPLOT_DIR=$PREFIX/include/pgplot

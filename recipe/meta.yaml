@@ -1,6 +1,6 @@
 {% set name = "psrchive" %}
-{% set version = "2025-04-24" %}
-{% set sha256 = "20e3ba5dc8979af33498fc0d84a55acf2ac68c8fd854d91cf6e8bab73d65a9e3" %}
+{% set version = "2025-08-21" %}
+{% set sha256 = "4a23c07090a22078941b67844c7f6cb2da939233528b02128adddce0aba9ef3e" %}
 
 package:
   name: "{{ name | lower }}"
@@ -12,10 +12,14 @@ source:
   sha256: {{ sha256 }}
   patches:
       - 0004-swig410-flatstatic.patch
+      - 0006-python-numpy2.patch
+      - 0007-reference-operator.patch  # [osx]
+      - 0008-basename.patch  # [osx]
+      - 0009-epsic-complex.patch  # [osx]
 
 build:
   number: 0
-  skip: true  # [win or (python_impl == 'pypy')]
+  skip: true  # [win or (python_impl == 'pypy') or osx]
 
 requirements:
   build:

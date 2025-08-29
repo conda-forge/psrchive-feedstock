@@ -1,0 +1,18 @@
+diff --git a/Util/genutil/expand.C b/Util/genutil/expand.C
+index aeaf3067b..9ca17a98c 100644
+--- a/Util/genutil/expand.C
++++ b/Util/genutil/expand.C
+@@ -38,9 +38,11 @@ std::string dirname (const std::string& path)
+   return dirname( const_cast<char*>(copy.c_str()) );
+ }
+ 
++#if 0 
+ // returns the file name (using std C basename)
+ std::string basename (const std::string& path)
+ {
+   std::string copy = path;
+   return basename( const_cast<char*>(copy.c_str()) );
+-}
+\ No newline at end of file
++}
++#endif

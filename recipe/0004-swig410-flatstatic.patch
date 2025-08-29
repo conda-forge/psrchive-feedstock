@@ -1,3 +1,14 @@
+--- a/More/python/Makefile.am
++++ b/More/python/Makefile.am
+@@ -16,7 +16,7 @@ _psrchive_la_LIBADD = $(top_builddir)/More/libpsrmore.la \
+                       @PYTHON_LDFLAGS@ 
+ 
+ SWIG_FILE = $(srcdir)/psrchive.i
+-SWIG_FLAGS = -Wall -python -I$(top_builddir)/local_include -I$(top_builddir)
++SWIG_FLAGS = -Wall -python -flatstaticmethod -I$(top_builddir)/local_include -I$(top_builddir)
+ SWIG_DEPS = $(DEPDIR)/swig.deps
+ 
+ psrchive_wrap.cxx: $(SWIG_FILE) $(top_builddir)/config.h
 --- a/More/python/Makefile.in	2025-02-03 11:14:40.000000000 -0700
 +++ b/More/python/Makefile.in	2025-02-03 11:40:44.692578726 -0700
 @@ -472,7 +472,7 @@
