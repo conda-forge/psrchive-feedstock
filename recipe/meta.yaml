@@ -19,7 +19,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [win or (python_impl == 'pypy')]
+  skip: true  # [win or (python_impl == 'pypy') or osx]
 
 requirements:
   build:
