@@ -18,7 +18,7 @@ source:
       - 0009-epsic-complex.patch  # [osx]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or (python_impl == 'pypy') or osx]
 
 requirements:
