@@ -1,14 +1,15 @@
 {% set name = "psrchive" %}
-{% set version = "2026-04-17" %}
-{% set sha256 = "37ebaa4d2d65de18bbf8f82137543f7b8d78cb3a1cb1ee3718c443bd036bddd3" %}
+{% set version = "2026-08-04" %}
+{% set sha256 = "eee73629f40e650a0b68acb952248a46d75caab97e693fafb705dfe05e21d12f" %}
 
 package:
   name: "{{ name | lower }}"
   version: "{{ version | replace('-','.') }}"
 
 source:
+  # e.g., https://gitlab.com/pulsar-astronomy/psrchive/-/archive/2026-08-04/psrchive-2026-08-04.tar
   # e.g., https://sourceforge.net/projects/psrchive/files/psrchive/2021-01-18/psrchive-2021-01-18.tar.gz/download
-  url: https://sourceforge.net/projects/{{ name }}/files/{{ name }}/{{ version }}/{{ name }}-{{ version }}.tar.gz
+  url: https://gitlab.com/pulsar-astronomy/{{ name }}/-/archive/{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
       - 0004-swig410-flatstatic.patch
