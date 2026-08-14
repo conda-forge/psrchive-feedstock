@@ -25,7 +25,7 @@ fortran_compiler:
 fortran_compiler_version:
 - '14'
 gsl:
-- '2.7'
+- '2.8'
 libcblas:
 - 3.9.* *netlib
 numpy:
