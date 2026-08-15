@@ -1,12 +1,3 @@
-diff --git a/.build-commons b/.build-commons
-index 90419010a..23cc1f42e 160000
---- a/.build-commons
-+++ b/.build-commons
-@@ -1 +1 @@
--Subproject commit 90419010a431800e62e7887701999cfd67ad6948
-+Subproject commit 23cc1f42edb78e044d5f8a347303eb0aac380075
-diff --git a/More/python/psrchive.i b/More/python/psrchive.i
-index 7a72b6db9..b2a1f9a68 100644
 --- a/More/python/psrchive.i
 +++ b/More/python/psrchive.i
 @@ -3,12 +3,29 @@
