@@ -14,6 +14,12 @@ autoreconf -i -f
 ./configure --prefix=$PREFIX --disable-local --enable-shared \
   --includedir=$PREFIX/include/psrchive --with-Qt-dir=no \
   PGPLOT_DIR=$PREFIX/include/pgplot
+
+# Patch legacy Python 2 C-API calls in SWIG generated wrappers for Python 3.12+ compatibility
+find . -type f \( -name "*.cxx" -o -name "*.i" \) -exec sed -i.bak 's/PyString_FromString/PyUnicode_FromString/g' {} +
+find . -type f \( -name "*.cxx" -o -name "*.i" \) -exec sed -i.bak 's/PyString_AsString/PyUnicode_AsUTF8/g' {} +
+find . -type f \( -name "*.cxx" -o -name "*.i" \) -exec sed -i.bak 's/PyString_Check/PyUnicode_Check/g' {} +
+
 make -j${CPU_COUNT}
 make install
 
