@@ -1,5 +1,5 @@
 --- More/python/psrchive.i	2026-02-26 21:43:35.000000000 +1300
-+++ More/python/psrchive.i	2026-08-16 08:00:18.620399233 +1200
++++ More/python/psrchive.i	2026-08-16 08:44:18.685538186 +1200
 @@ -5,12 +5,33 @@
  
  %{
@@ -63,3 +63,25 @@
              return (PyObject *)result;
          } 
      }
+@@ -939,8 +954,8 @@
+ 
+         // Pack arrays into tuple
+         PyTupleObject *result = (PyTupleObject *)PyTuple_New(2);
+-        PyTuple_SetItem((PyObject *)result, 0, (PyObject *)PyInt_FromLong((long)hi));
+-        PyTuple_SetItem((PyObject *)result, 1, (PyObject *)PyInt_FromLong((long)lo));
++        PyTuple_SetItem((PyObject *)result, 0, (PyObject *)PyLong_FromLong((long)hi));
++        PyTuple_SetItem((PyObject *)result, 1, (PyObject *)PyLong_FromLong((long)lo));
+         return (PyObject *)result;
+     }
+ }
+@@ -955,8 +970,8 @@
+ 
+         // Pack arrays into tuple
+         PyTupleObject *result = (PyTupleObject *)PyTuple_New(2);
+-        PyTuple_SetItem((PyObject *)result, 0, (PyObject *)PyInt_FromLong((long)hi));
+-        PyTuple_SetItem((PyObject *)result, 1, (PyObject *)PyInt_FromLong((long)lo));
++        PyTuple_SetItem((PyObject *)result, 0, (PyObject *)PyLong_FromLong((long)hi));
++        PyTuple_SetItem((PyObject *)result, 1, (PyObject *)PyLong_FromLong((long)lo));
+         return (PyObject *)result;
+     }
+ }
