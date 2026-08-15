@@ -1,17 +1,16 @@
 {% set name = "psrchive" %}
-{% set version = "2026-08-12" %}
-{% set sha256 = "ca2f66b3568f2929174bcfffcec0ceaa79bd9723ed3302ed70acbff5e1b1b79f" %}
+{% set version = "2026-08-15" %}
+{% set sha256 = "724e85f9ac43e3b35f982dc7cf3e57d05d4c81494d8533b5ceaa1f2acd8bef4c" %}
 
 package:
   name: "{{ name | lower }}"
   version: "{{ version | replace('-','.') }}"
 
 source:
-  # e.g., https://gitlab.com/pulsar-astronomy/psrchive/-/archive/2026-08-04/psrchive-2026-08-04.tar
-  url: https://gitlab.com/pulsar-astronomy/{{ name }}/-/archive/{{ version }}/{{ name }}-{{ version }}.tar.gz
+  # e.g., https://gitlab.com/pulsar-astronomy/psrchive/-/releases/2026-08-15/downloads/psrchive-2026-08-15.tar.gz
+  url: https://gitlab.com/pulsar-astronomy/{{ name }}/-/releases/{{ version }}/downloads/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-      - 0004-swig410-flatstatic.patch
       - 0007-reference-operator.patch  # [osx]
       - 0008-basename.patch  # [osx]
       - 0009-epsic-complex.patch  # [osx]
