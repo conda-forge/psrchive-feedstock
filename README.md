@@ -179,6 +179,12 @@ Current build status
         </table>
       </details>
     </td>
+    <td>GitHub Actions</td>
+    <td>
+      <a href="https://github.com/conda-forge/psrchive-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/psrchive-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
+    </td>
   </tr>
 </table>
 
