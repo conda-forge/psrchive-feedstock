@@ -1,17 +1,16 @@
 {% set name = "psrchive" %}
-{% set version = "2026-04-17" %}
-{% set sha256 = "37ebaa4d2d65de18bbf8f82137543f7b8d78cb3a1cb1ee3718c443bd036bddd3" %}
+{% set version = "2026-08-15" %}
+{% set sha256 = "724e85f9ac43e3b35f982dc7cf3e57d05d4c81494d8533b5ceaa1f2acd8bef4c" %}
 
 package:
   name: "{{ name | lower }}"
   version: "{{ version | replace('-','.') }}"
 
 source:
-  # e.g., https://sourceforge.net/projects/psrchive/files/psrchive/2021-01-18/psrchive-2021-01-18.tar.gz/download
-  url: https://sourceforge.net/projects/{{ name }}/files/{{ name }}/{{ version }}/{{ name }}-{{ version }}.tar.gz
+  # e.g., https://gitlab.com/pulsar-astronomy/psrchive/-/releases/2026-08-15/downloads/psrchive-2026-08-15.tar.gz
+  url: https://gitlab.com/pulsar-astronomy/{{ name }}/-/releases/{{ version }}/downloads/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-      - 0004-swig410-flatstatic.patch
       - 0007-reference-operator.patch  # [osx]
       - 0008-basename.patch  # [osx]
       - 0009-epsic-complex.patch  # [osx]
@@ -65,11 +64,11 @@ test:
     - python -c "import psrchive; psrchive.Archive_load('test_data/example_psrfits.fits')"
 
 about:
-  home: http://psrchive.sourceforge.net/
+  home: https://psrchive.readthedocs.io/en/latest/
   license: AFL-2.1
   license_file: COPYING
   summary: PSRCHIVE is a library for the analysis of pulsar astronomical data.
-  dev_url: https://sourceforge.net/projects/psrchive/
+  dev_url: https://gitlab.com/pulsar-astronomy/psrchive
 
 extra:
   recipe-maintainers:

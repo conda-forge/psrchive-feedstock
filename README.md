@@ -3,19 +3,26 @@ About psrchive-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/psrchive-feedstock/blob/main/LICENSE.txt)
 
-Home: http://psrchive.sourceforge.net/
+Home: https://psrchive.readthedocs.io/en/latest/
 
 Package license: AFL-2.1
 
 Summary: PSRCHIVE is a library for the analysis of pulsar astronomical data.
 
-Development: https://sourceforge.net/projects/psrchive/
+Development: https://gitlab.com/pulsar-astronomy/psrchive
 
 Current build status
 ====================
 
 
-<table>
+<table><tr>
+    <td>GitHub Actions</td>
+    <td>
+      <a href="https://github.com/conda-forge/psrchive-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/psrchive-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
+    </td>
+  </tr>
   <tr>
     <td>Azure</td>
     <td>
