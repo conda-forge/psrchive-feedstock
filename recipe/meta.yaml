@@ -15,9 +15,10 @@ source:
       - 0007-reference-operator.patch  # [osx]
       - 0008-basename.patch  # [osx]
       - 0009-epsic-complex.patch  # [osx]
+      - 0010-python3-c-api.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or (python_impl == 'pypy') or osx]
 
 requirements:
