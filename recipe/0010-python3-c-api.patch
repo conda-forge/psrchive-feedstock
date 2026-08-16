@@ -1,7 +1,7 @@
---- More/python/psrchive.i	2026-02-26 21:43:35.000000000 +1300
-+++ More/python/psrchive.i	2026-08-16 08:44:18.685538186 +1200
-@@ -5,12 +5,33 @@
- 
+--- More/python/psrchive.i	2026-08-15 00:52:19.000000000 +1200
++++ More/python/psrchive.i	2026-08-16 14:07:42.999430350 +1200
+@@ -3,12 +3,29 @@
+ // HEADER BLOCK: For the C++ compiler
  %{
  #define SWIG_FILE_WITH_INIT
 +#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
@@ -27,14 +27,10 @@
 +  #define compat_PyString_Check      PyString_Check
 +#endif
 +
-+#if HAVE_CONFIG_H
-+#include <config.h>
-+#endif
-+
- #include "Reference.h"
- #include "Pulsar/IntegrationManager.h"
- #include "Pulsar/IntegrationExpert.h"
-@@ -222,17 +243,11 @@
+ #if HAVE_CONFIG_H
+ #include <config.h>
+ #endif
+@@ -228,17 +245,11 @@
  // Convert various enums to/from string
  %define %map_enum(TYPE)
  %typemap(out) Signal:: ## TYPE {
@@ -51,10 +47,28 @@
 -        const char *typestr = PyString_AsString($input);
 -#endif
 +        const char *typestr = compat_PyString_AsString($input);
-         if (typestr!=NULL) {
-             $1 = Signal::string2 ## TYPE (typestr);
-         }
-@@ -733,7 +748,7 @@
+         if (typestr==NULL) 
+           throw Error (InvalidState, "SWIG string to Signal::*", "typestr == NULL");
+ 
+@@ -255,17 +266,6 @@
+ %map_enum(Scale)
+ %map_enum(Source)
+ 
+-// return long doubles as  numpy scalars
+-// implementation left in case wanted later
+-//%typemap(out) (long double) {
+-//  npy_intp size[1];
+-//  size[0] = 1;
+-//  PyArrayObject *rval;
+-//  rval = (PyArrayObject *)PyArray_SimpleNew(0, size, NPY_LONGDOUBLE);
+-//  *((long double *)(rval->data)) = $1;
+-//  $result = (PyObject *) rval;
+-//}
+-
+ // return long doubles as Python floats
+ %typemap(out) (long double) {
+   $result = PyFloat_FromDouble(double($1));
+@@ -742,7 +742,7 @@
          }
          else
          {
@@ -63,7 +77,7 @@
              return (PyObject *)result;
          } 
      }
-@@ -939,8 +954,8 @@
+@@ -948,8 +948,8 @@
  
          // Pack arrays into tuple
          PyTupleObject *result = (PyTupleObject *)PyTuple_New(2);
@@ -74,7 +88,7 @@
          return (PyObject *)result;
      }
  }
-@@ -955,8 +970,8 @@
+@@ -964,8 +964,8 @@
  
          // Pack arrays into tuple
          PyTupleObject *result = (PyTupleObject *)PyTuple_New(2);
