@@ -1,6 +1,6 @@
 {% set name = "psrchive" %}
-{% set version = "2026-08-15" %}
-{% set sha256 = "724e85f9ac43e3b35f982dc7cf3e57d05d4c81494d8533b5ceaa1f2acd8bef4c" %}
+{% set version = "9999-99-99" %}
+{% set sha256 = "0018b6ce4219567b1dada2f86b5df272605ce1e7abbb03d52716d8d535f9f426" %}
 
 package:
   name: "{{ name | lower }}"
@@ -17,7 +17,7 @@ source:
       - 0010-python3-c-api.patch
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win or (python_impl == 'pypy') or osx]
 
 requirements:
