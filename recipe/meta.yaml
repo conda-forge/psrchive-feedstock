@@ -1,6 +1,6 @@
 {% set name = "psrchive" %}
-{% set version = "2026-09-16" %}
-{% set sha256 = "9ff79dbcb3a7e30904b6e4e53f8d10256eb297894d3168892658efc81f48b885" %}
+{% set version = "2026-10-16" %}
+{% set sha256 = "e765818acc24ca33b7447392c035091c19bbc3dee99e7327cc13c637848b9331" %}
 
 package:
   name: "{{ name | lower }}"
