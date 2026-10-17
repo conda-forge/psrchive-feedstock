@@ -37,6 +37,7 @@ requirements:
     - pgplot
     - gsl
     - python {{ python }}
+    - libpython  # [py>=315]
     - numpy
     - fftw
     - tempo2
